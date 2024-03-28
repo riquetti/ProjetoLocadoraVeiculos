@@ -1,0 +1,5 @@
+rootProject.name = 'ProjetoLocadoraVeiculos'
+
+include ':app'
+include ':lib'
+
