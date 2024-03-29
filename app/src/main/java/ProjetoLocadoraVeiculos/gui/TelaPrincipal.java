@@ -5,6 +5,7 @@
 package ProjetoLocadoraVeiculos.gui;
 
 import ProjetoLocadoraVeiculos.gui.cadastro.CadastroFabricanteGUI;
+import ProjetoLocadoraVeiculos.gui.cadastro.CadastroModeloGUI;
 
 /**
  *
@@ -31,7 +32,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCadastro = new javax.swing.JMenu();
         menuCadastroFabricante = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuCadastroModelo = new javax.swing.JMenuItem();
+        Locacao = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,10 +48,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(menuCadastroFabricante);
 
+        menuCadastroModelo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        menuCadastroModelo.setText("Modelo");
+        menuCadastroModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroModeloActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuCadastroModelo);
+
         jMenuBar1.add(menuCadastro);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        Locacao.setText("Locação");
+        jMenuBar1.add(Locacao);
 
         setJMenuBar(jMenuBar1);
 
@@ -73,45 +84,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_menuCadastroFabricanteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void menuCadastroModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroModeloActionPerformed
+        CadastroModeloGUI dialog = new CadastroModeloGUI(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_menuCadastroModeloActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu Locacao;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCadastroFabricante;
+    private javax.swing.JMenuItem menuCadastroModelo;
     // End of variables declaration//GEN-END:variables
 }
