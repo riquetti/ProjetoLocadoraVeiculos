@@ -8,4 +8,8 @@ dependencies{
     implementation project(':lib')
 }
 
+application{
+    mainClass = 'ProjetoLocadoraVeiculos.Main'
+}
+
 description = 'app'
