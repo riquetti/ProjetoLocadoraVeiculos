@@ -26,26 +26,26 @@ public class CadastroModeloGUI extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        carregarlista();
+        carregarLista();
 
     }
 
-    public void carregarlista() {
+    public void carregarLista() {
         List<Modelo> listaModelo = dao.select();
 
-        Object[][] dados = new Object[listaModelo.size()][3];
+        Object[][] dados = new Object[listaModelo.size()][4];
 
         int i = 0;
 
         for (Modelo modelo : listaModelo) {
             dados[i][0] = modelo.getId();
-            dados[i][1] = modelo.getId_fabricante();
+            dados[i][1] = modelo.getNome_fabricante();
             dados[i][2] = modelo.getNome();
 
             i++;
         }
 
-        TableModel model = new DefaultTableModel(dados, new Object[]{"Id", "ID_Modelo", "Nome"}) {
+        TableModel model = new DefaultTableModel(dados, new Object[]{"Id", "Nome Fabricante", "Nome"}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -156,7 +156,7 @@ public class CadastroModeloGUI extends javax.swing.JDialog {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         CadastroModeloEditarGUI dialog = new CadastroModeloEditarGUI(null, true, this);
         dialog.setVisible(true);
-        carregarlista();
+        carregarLista();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -171,7 +171,7 @@ public class CadastroModeloGUI extends javax.swing.JDialog {
         dialog.carregarModelo((Integer) tblModelo.getModel().getValueAt(selectedRow, 0));
         dialog.setVisible(true);
 
-        carregarlista();
+        carregarLista();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -182,7 +182,7 @@ public class CadastroModeloGUI extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(this, "Fabricante Modelo com Sucesso!", "SUCESS", JOptionPane.INFORMATION_MESSAGE);
 
-            carregarlista();
+            carregarLista();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

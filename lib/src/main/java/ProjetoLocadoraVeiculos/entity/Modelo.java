@@ -9,7 +9,7 @@ package ProjetoLocadoraVeiculos.entity;
  * @author Riquetti
  */
 public class Modelo {
-    private int id;
+    public int id;
     private int id_fabricante;
     private String nome;
     private String nome_fabricante;

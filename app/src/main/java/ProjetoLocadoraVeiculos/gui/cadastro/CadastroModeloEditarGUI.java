@@ -4,8 +4,13 @@
  */
 package ProjetoLocadoraVeiculos.gui.cadastro;
 
+import ProjetoLocadoraVeiculos.dao.FabricanteDAO;
 import ProjetoLocadoraVeiculos.dao.ModeloDAO;
+import ProjetoLocadoraVeiculos.entity.Fabricante;
 import ProjetoLocadoraVeiculos.entity.Modelo;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,19 +29,43 @@ public class CadastroModeloEditarGUI extends javax.swing.JDialog {
     public CadastroModeloEditarGUI(java.awt.Frame parent, boolean modal, CadastroModeloGUI dialogParent) {
         super(parent, modal);
         parentDialog = dialogParent;
+
         initComponents();
+
+        carregarComboFabricante();
     }
+
+    
 
     public void carregarModelo(int id) {
         modeloEditar = dao.select(id);
-        
-        txtFabricante.setText(String.valueOf(modeloEditar.getId_fabricante()));
+       
+        txtNome.setText(String.valueOf(modeloEditar.getNome()));
+//               txtFabricante.setText(modeloEditar.getNome_fabricante());
+    }
+    
+    
+    
+    private void carregarComboFabricante() {
+        FabricanteDAO dao = new FabricanteDAO();
+        List<Fabricante> listaFabricante = dao.select();
 
-//        txtFabricante.setText(modeloEditar.getNome());
+        Object[] items = new Object[listaFabricante.size()];
+
+        int contador = 0;
+
+        for (Fabricante fabricante : listaFabricante) {
+            items[contador] = fabricante;
+
+            contador++;
+        }
+
+        ComboBoxModel model = new DefaultComboBoxModel(items);
+
+        cboFabricante.setModel(model);
     }
 
     private void limparCampos() {
-        txtFabricante.setText("");
         txtNome.setText("");
     }
 
@@ -52,23 +81,17 @@ public class CadastroModeloEditarGUI extends javax.swing.JDialog {
         jScrollBar1 = new javax.swing.JScrollBar();
         jMenuItem1 = new javax.swing.JMenuItem();
         lblFabricante = new javax.swing.JLabel();
-        txtFabricante = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        cboFabricante = new javax.swing.JComboBox<>();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblFabricante.setText("Fabricante");
-
-        txtFabricante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFabricanteActionPerformed(evt);
-            }
-        });
 
         lblNome.setText("Nome");
 
@@ -94,36 +117,36 @@ public class CadastroModeloEditarGUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 316, Short.MAX_VALUE)
                                 .addComponent(btnFechar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(52, 52, 52)
-                                        .addComponent(btnSalvar))
-                                    .addComponent(lblNome)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(52, 52, 52)
+                                            .addComponent(btnSalvar))
+                                        .addComponent(lblNome))
                                     .addComponent(lblFabricante))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cboFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lblFabricante)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cboFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,15 +167,19 @@ public class CadastroModeloEditarGUI extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (modeloEditar == null) {
-            
-            int id_fabricante = Integer.parseInt(txtFabricante.getText());
+
+            //int id_fabricante = Integer.parseInt(txtFabricante.getText());
             String nome = txtNome.getText();
+
+            Fabricante fabricanteSelecionado = (Fabricante) cboFabricante.getModel().getSelectedItem();
+
+            int id_fabricante = fabricanteSelecionado.getId();
 
             try {
                 dao.insert(id_fabricante, nome);
                 JOptionPane.showMessageDialog(this, "Modelo Inserido com Sucesso!", "SUCESS", JOptionPane.INFORMATION_MESSAGE);
 
-                parentDialog.carregarlista();
+                parentDialog.carregarLista();
 
                 limparCampos();
 
@@ -161,13 +188,20 @@ public class CadastroModeloEditarGUI extends javax.swing.JDialog {
             }
 
         } else {
-            int id_fabricante = Integer.parseInt(txtFabricante.getText());
+            //int id_fabricante = Integer.parseInt(txtFabricante.getText());
             String nome = txtNome.getText();
+
+            Fabricante fabricanteSelecionado = (Fabricante) cboFabricante.getModel().getSelectedItem();
+
+            int id_fabricante = fabricanteSelecionado.getId();
+
+            int id = modeloEditar.id;
+
             try {
-                dao.update(modeloEditar.getId(), nome);
+                dao.update(nome, id_fabricante, id);
                 JOptionPane.showMessageDialog(this, "Modelo Editado com Sucesso!", "SUCESS", JOptionPane.INFORMATION_MESSAGE);
 
-                parentDialog.carregarlista();
+                parentDialog.carregarLista();
 
                 this.dispose();
 
@@ -179,18 +213,14 @@ public class CadastroModeloEditarGUI extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void txtFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFabricanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFabricanteActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cboFabricante;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JLabel lblFabricante;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JTextField txtFabricante;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

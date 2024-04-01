@@ -20,7 +20,10 @@ public class ModeloDAO {
     public List<Modelo> select() {
         List<Modelo> listaModelo = new ArrayList<>();
         String query = String.format("""
-                       SELECT * FROM modelo;
+                       select m.id, m.id_fabricante, m.nome, f.nome as nome_fabricante
+                       from modelo m
+                       inner join fabricante f
+                       on f.id = m.id_fabricante
                        """);
 
         try (Statement stmt = Conexao.getConn().createStatement(); ResultSet rs = stmt.executeQuery(query)) {
@@ -29,6 +32,7 @@ public class ModeloDAO {
                 modelo.setId(rs.getInt("id"));
                 modelo.setId_fabricante(rs.getInt("id_fabricante"));
                 modelo.setNome(rs.getString("nome"));
+                modelo.setNome_fabricante(rs.getString("nome_fabricante"));
 
                 listaModelo.add(modelo);
             }
@@ -76,14 +80,12 @@ public class ModeloDAO {
         }
     }
 
-    public int update(int id, String nome){
+    public int update( String nome, int id_fabricante, int id){
             String query = String.format("""
                            UPDATE public.modelo
-                           SET 
-                            nome = '%s'
-                           WHERE
-                            id= %d;
-                           """, nome, id);
+                            SET nome = '%s', id_fabricante = %d
+                                WHERE id = %d;
+                           """, nome, id_fabricante, id);
 
             try (Statement stmt = Conexao.getConn().createStatement();) {
                 return stmt.executeUpdate(query);

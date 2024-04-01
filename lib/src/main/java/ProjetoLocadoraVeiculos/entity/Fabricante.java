@@ -13,6 +13,11 @@ public class Fabricante {
     private int id;
     private String nome;
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
     public int getId() {
         return id;
     }
