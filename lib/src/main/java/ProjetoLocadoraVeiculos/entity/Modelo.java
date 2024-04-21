@@ -14,6 +14,11 @@ public class Modelo {
     private String nome;
     private String nome_fabricante;
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
     public int getId() {
         return id;
     }

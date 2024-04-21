@@ -14,6 +14,11 @@ public class Municipio {
     private int id_estado;
     private String estado;
 
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
     public String getEstado() {
         return estado;
     }

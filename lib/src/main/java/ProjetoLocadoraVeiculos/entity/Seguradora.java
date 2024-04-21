@@ -17,6 +17,29 @@ public class Seguradora {
     private Double valor;
     private int id_municipio;
     private int id_estado;
+    private String municipio;
+    private String estado;
+
+    @Override
+    public String toString() {
+        return "Seguradora{" + "id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", email=" + email + ", valor=" + valor + ", id_municipio=" + id_municipio + ", id_estado=" + id_estado + ", municipio=" + municipio + ", estado=" + estado + '}';
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public int getId() {
         return id;

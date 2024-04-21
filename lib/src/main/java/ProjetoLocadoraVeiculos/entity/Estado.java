@@ -13,6 +13,11 @@ public class Estado {
     private String descricao;
     private String sigla;
 
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
     public int getId_estado() {
         return id_estado;
     }

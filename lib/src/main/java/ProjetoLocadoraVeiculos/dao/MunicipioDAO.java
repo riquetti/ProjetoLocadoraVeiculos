@@ -28,7 +28,7 @@ public class MunicipioDAO {
         try (Statement stmt = Conexao.getConn().createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Municipio municipio = new Municipio();
-                municipio.setId_municipio(rs.getInt("id_estado"));
+                municipio.setId_municipio(rs.getInt("id_municipio"));
                 municipio.setDescricao(rs.getString("descricao"));
                 municipio.setId_estado(rs.getInt("id_estado"));
                 municipio.setEstado(rs.getString("estado"));
@@ -50,10 +50,31 @@ public class MunicipioDAO {
         try (Statement stmt = Conexao.getConn().createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             if (rs.next()) {
                 Municipio municipio = new Municipio();
-                municipio.setId_municipio(rs.getInt("id_estado"));
+                municipio.setId_municipio(rs.getInt("id_municipio"));
                 municipio.setDescricao(rs.getString("descricao"));
                 municipio.setId_estado(rs.getInt("id_estado"));
                 municipio.setEstado(rs.getString("estado"));
+
+                return municipio;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    
+    public Municipio selectEstadoMunicipio(int id_estado) {
+        String query = String.format("""
+                       SELECT * FROM municipio WHERE id_estado = %d;
+                       """, id_estado);
+
+        try (Statement stmt = Conexao.getConn().createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                Municipio municipio = new Municipio();
+                municipio.setId_municipio(rs.getInt("id_municipio"));
+                municipio.setDescricao(rs.getString("descricao"));
+                municipio.setId_estado(rs.getInt("id_estado"));
 
                 return municipio;
             }
