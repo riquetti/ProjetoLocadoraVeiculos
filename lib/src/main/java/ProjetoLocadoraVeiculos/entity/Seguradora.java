@@ -22,7 +22,7 @@ public class Seguradora {
 
     @Override
     public String toString() {
-        return "Seguradora{" + "id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", email=" + email + ", valor=" + valor + ", id_municipio=" + id_municipio + ", id_estado=" + id_estado + ", municipio=" + municipio + ", estado=" + estado + '}';
+        return nome;
     }
 
     public String getMunicipio() {

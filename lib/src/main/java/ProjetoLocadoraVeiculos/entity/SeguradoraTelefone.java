@@ -13,6 +13,21 @@ public class SeguradoraTelefone {
     private int id_seguradora_telefone;
     private int id_seguradora;
     private String telefone_seguradora;
+    private String nome_seguradora;
+
+    @Override
+    public String toString() {
+        return nome_seguradora;
+    }
+
+    public String getNome_seguradora() {
+        return nome_seguradora;
+    }
+
+    public void setNome_seguradora(String nome_seguradora) {
+        this.nome_seguradora = nome_seguradora;
+    }
+    
 
     public int getId_seguradora_telefone() {
         return id_seguradora_telefone;
