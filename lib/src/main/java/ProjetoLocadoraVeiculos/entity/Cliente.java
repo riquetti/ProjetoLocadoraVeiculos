@@ -13,15 +13,15 @@ import java.time.LocalDate;
 public class Cliente {
 
     private int id;
-    private String nome;
+    private String nome_cliente;
     private String rg;
     private String cpf;
     private String logradouro;
     private int id_municipio;
     private int id_estado;
     private String cnh;
-    private LocalDate data_nascimento;
-    private String email;
+    private LocalDate cnhdatavencimento;
+    private String email_cliente;
 
     public int getId() {
         return id;
@@ -32,11 +32,11 @@ public class Cliente {
     }
 
     public String getNome() {
-        return nome;
+        return nome_cliente;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome_cliente = nome;
     }
 
     public String getRg() {
@@ -87,24 +87,24 @@ public class Cliente {
         this.cnh = cnh;
     }
 
-    public LocalDate getData_nascimento() {
-        return data_nascimento;
+    public LocalDate getCnhdatavencimento() {
+        return cnhdatavencimento;
     }
 
-    public void setData_nascimento(java.sql.Date data) {
+    public void setCnhdatavencimento(java.sql.Date data) {
         if (data != null) {
-            this.data_nascimento = data.toLocalDate();
+            this.cnhdatavencimento = data.toLocalDate();
         } else {
-            this.data_nascimento = null;
+            this.cnhdatavencimento = null;
         }
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmail_cliente() {
+        return email_cliente;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail_cliente(String email) {
+        this.email_cliente = email;
     }
 
 }
