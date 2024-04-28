@@ -12,6 +12,15 @@ public class ClienteTelefone {
     private int id_telefone;
     private int id_cliente;
     private String telefone;
+    private String cliente;
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
 
     public int getId_telefone() {
         return id_telefone;
@@ -23,7 +32,7 @@ public class ClienteTelefone {
 
     @Override
     public String toString() {
-        return "ClienteTelefone{" + "id_cliente=" + id_cliente + ", telefone=" + telefone + '}';
+        return cliente;
     }
 
     public int getId_cliente() {

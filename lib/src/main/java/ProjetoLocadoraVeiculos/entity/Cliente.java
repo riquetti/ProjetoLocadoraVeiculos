@@ -23,6 +23,11 @@ public class Cliente {
     private LocalDate cnhdatavencimento;
     private String email_cliente;
 
+    @Override
+    public String toString() {
+        return nome_cliente;
+    }
+
     public int getId() {
         return id;
     }

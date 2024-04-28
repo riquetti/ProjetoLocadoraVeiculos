@@ -6,6 +6,7 @@ package ProjetoLocadoraVeiculos.gui;
 
 import ProjetoLocadoraVeiculos.gui.cadastro.CadastroCarroGUI;
 import ProjetoLocadoraVeiculos.gui.cadastro.CadastroClienteGUI;
+import ProjetoLocadoraVeiculos.gui.cadastro.CadastroClienteTelefoneGUI;
 import ProjetoLocadoraVeiculos.gui.cadastro.CadastroFabricanteGUI;
 import ProjetoLocadoraVeiculos.gui.cadastro.CadastroModeloGUI;
 import ProjetoLocadoraVeiculos.gui.cadastro.CadastroSeguradoraGUI;
@@ -41,6 +42,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuSeguradora = new javax.swing.JMenuItem();
         menuTelefoneSeguradora = new javax.swing.JMenuItem();
         menuCliente = new javax.swing.JMenuItem();
+        menuTelefoneCliente = new javax.swing.JMenuItem();
         Locacao = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -101,6 +103,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(menuCliente);
 
+        menuTelefoneCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        menuTelefoneCliente.setText("Telefone Cliente");
+        menuTelefoneCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTelefoneClienteActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuTelefoneCliente);
+
         jMenuBar1.add(menuCadastro);
 
         Locacao.setText("Locação");
@@ -153,6 +164,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_menuClienteActionPerformed
 
+    private void menuTelefoneClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTelefoneClienteActionPerformed
+        CadastroClienteTelefoneGUI dialog = new CadastroClienteTelefoneGUI(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_menuTelefoneClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Locacao;
@@ -163,6 +179,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCarro;
     private javax.swing.JMenuItem menuCliente;
     private javax.swing.JMenuItem menuSeguradora;
+    private javax.swing.JMenuItem menuTelefoneCliente;
     private javax.swing.JMenuItem menuTelefoneSeguradora;
     // End of variables declaration//GEN-END:variables
 }

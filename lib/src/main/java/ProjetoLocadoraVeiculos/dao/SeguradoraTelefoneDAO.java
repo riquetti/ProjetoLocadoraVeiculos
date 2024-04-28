@@ -5,7 +5,6 @@
 package ProjetoLocadoraVeiculos.dao;
 
 import ProjetoLocadoraVeiculos.Conexao;
-import ProjetoLocadoraVeiculos.entity.Seguradora;
 import ProjetoLocadoraVeiculos.entity.SeguradoraTelefone;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
