@@ -20,11 +20,10 @@ import javax.swing.JOptionPane;
  * @author Riquetti
  */
 public class CadastroCarroEditarGUI extends javax.swing.JDialog {
-        
+
     // corrigir update
     // corrigir entrada com numeros com virgulas
     // filtro de fabricante de filtrar modelo
-    
     private CarroDAO dao = new CarroDAO();
     private Carro carroEditar = null;
     private CadastroCarroGUI parentDialog;
@@ -50,7 +49,6 @@ public class CadastroCarroEditarGUI extends javax.swing.JDialog {
         cbxDisponivel.setSelected(carroEditar.isDisponivel());
         txtAno.setText(String.valueOf(carroEditar.getAno()));
         txtValorLocacao.setText(String.valueOf(carroEditar.getValorLocacao()));
-        
 
     }
 
@@ -71,25 +69,33 @@ public class CadastroCarroEditarGUI extends javax.swing.JDialog {
         ComboBoxModel model = new DefaultComboBoxModel(items);
 
         cboFabricante.setModel(model);
+        cboFabricante.addActionListener((e) -> {
+            carregarComboModelo();
+        });
     }
 
     private void carregarComboModelo() {
-        ModeloDAO dao = new ModeloDAO();
-        List<Modelo> listaModelo = dao.select();
+        Fabricante fabricanteSelecionado = (Fabricante) cboFabricante.getSelectedItem();
+        if (fabricanteSelecionado != null) {
+            int idFabricante = fabricanteSelecionado.getId();
 
-        Object[] items = new Object[listaModelo.size()];
+            ModeloDAO dao = new ModeloDAO();
+            List<Modelo> listaModelo = dao.selectByFabricante(idFabricante);
 
-        int contador = 0;
+            Object[] items = new Object[listaModelo.size()];
 
-        for (Modelo modelo : listaModelo) {
-            items[contador] = modelo;
+            int contador = 0;
 
-            contador++;
+            for (Modelo modelo : listaModelo) {
+                items[contador] = modelo;
+
+                contador++;
+            }
+
+            ComboBoxModel model = new DefaultComboBoxModel(items);
+
+            cboModelo.setModel(model);
         }
-
-        ComboBoxModel model = new DefaultComboBoxModel(items);
-
-        cboModelo.setModel(model);
     }
 
     private void limparCampos() {
@@ -250,7 +256,6 @@ public class CadastroCarroEditarGUI extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (carroEditar == null) {
-            
 
             Fabricante fabricanteSelecionado = (Fabricante) cboFabricante.getModel().getSelectedItem();
             Modelo modeloSelecionado = (Modelo) cboModelo.getModel().getSelectedItem();
@@ -290,7 +295,7 @@ public class CadastroCarroEditarGUI extends javax.swing.JDialog {
 
             int idFabricante = fabricanteSelecionado.getId();
             int idModelo = modeloSelecionado.getId();
-            
+
             int id = carroEditar.getId();
 
             try {

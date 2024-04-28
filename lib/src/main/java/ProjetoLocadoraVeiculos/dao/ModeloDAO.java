@@ -6,6 +6,7 @@ package ProjetoLocadoraVeiculos.dao;
 
 import ProjetoLocadoraVeiculos.Conexao;
 import ProjetoLocadoraVeiculos.entity.Modelo;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -42,7 +43,30 @@ public class ModeloDAO {
         }
         return listaModelo;
     }
-    
+
+    public List<Modelo> selectByFabricante(int idFabricante) {
+        List<Modelo> modelos = new ArrayList<>();
+
+        String query = "SELECT * FROM modelo WHERE id_fabricante = ?";
+
+        try (PreparedStatement stmt = Conexao.getConn().prepareStatement(query)) {
+            stmt.setInt(1, idFabricante);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Modelo modelo = new Modelo();
+                modelo.setId(rs.getInt("id"));
+                modelo.setId_fabricante(rs.getInt("id_fabricante"));
+                modelo.setNome(rs.getString("nome"));
+                modelos.add(modelo);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar modelos: " + e.getMessage());
+        }
+
+        return modelos;
+    }
+
     public Modelo select(int id) {
         String query = String.format("""
                        SELECT * FROM modelo WHERE id = %d;
@@ -71,7 +95,7 @@ public class ModeloDAO {
                        (id_fabricante, nome)
                        VALUES
                        (%d, '%s');
-                       """,id_fabricante, nome);
+                       """, id_fabricante, nome);
 
         try (Statement stmt = Conexao.getConn().createStatement();) {
             return stmt.executeUpdate(query);
@@ -80,31 +104,31 @@ public class ModeloDAO {
         }
     }
 
-    public int update( String nome, int id_fabricante, int id){
-            String query = String.format("""
+    public int update(String nome, int id_fabricante, int id) {
+        String query = String.format("""
                            UPDATE public.modelo
                             SET nome = '%s', id_fabricante = %d
                                 WHERE id = %d;
                            """, nome, id_fabricante, id);
 
-            try (Statement stmt = Conexao.getConn().createStatement();) {
-                return stmt.executeUpdate(query);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } 
-    
-    public int delete(int id){
-            String query = String.format("""
+        try (Statement stmt = Conexao.getConn().createStatement();) {
+            return stmt.executeUpdate(query);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int delete(int id) {
+        String query = String.format("""
                            DELETE FROM modelo
                             WHERE
                             id= %d;
                            """, id);
 
-            try (Statement stmt = Conexao.getConn().createStatement();) {
-                return stmt.executeUpdate(query);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        try (Statement stmt = Conexao.getConn().createStatement();) {
+            return stmt.executeUpdate(query);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+    }
 }
