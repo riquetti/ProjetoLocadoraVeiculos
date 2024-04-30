@@ -22,10 +22,36 @@ public class Cliente {
     private String cnh;
     private LocalDate cnhdatavencimento;
     private String email_cliente;
+    private String municipio;
+    private String estado;
 
+    public String getNome_cliente() {
+        return nome_cliente;
+    }
+
+    public void setNome_cliente(String nome_cliente) {
+        this.nome_cliente = nome_cliente;
+    }
+    
     @Override
     public String toString() {
         return nome_cliente;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getId() {
@@ -34,14 +60,6 @@ public class Cliente {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome_cliente;
-    }
-
-    public void setNome(String nome) {
-        this.nome_cliente = nome;
     }
 
     public String getRg() {

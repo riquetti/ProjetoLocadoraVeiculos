@@ -12,13 +12,13 @@ import ProjetoLocadoraVeiculos.entity.Estado;
 import ProjetoLocadoraVeiculos.entity.Municipio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -57,7 +57,7 @@ public class CadastroClienteEditarGUI extends javax.swing.JDialog {
 
         clienteEditar = dao.select(id);
 
-        txtNome.setText(String.valueOf(clienteEditar.getNome()));
+        txtNome.setText(String.valueOf(clienteEditar.getNome_cliente()));
         txtRg.setText(String.valueOf(clienteEditar.getRg()));
         txtCpf.setText(String.valueOf(clienteEditar.getCpf()));
         txtLogradouro.setText(String.valueOf(clienteEditar.getLogradouro()));
@@ -92,27 +92,26 @@ public class CadastroClienteEditarGUI extends javax.swing.JDialog {
         ComboBoxModel model = new DefaultComboBoxModel(items);
 
         cboEstado.setModel(model);
+        cboEstado.addActionListener((e) -> {
+            carregarComboMunicipio();
+        });
     }
 
     private void carregarComboMunicipio() {
-        MunicipioDAO dao = new MunicipioDAO();
+        Estado estadoSelecionado = (Estado) cboEstado.getSelectedItem();
+        if (estadoSelecionado != null) {
+            int idEstado = estadoSelecionado.getId_estado();
 
-        List<Municipio> listaMunicipio = dao.select();
+            MunicipioDAO dao = new MunicipioDAO();
+            List<Municipio> listaMunicipio = dao.selectEstadoMunicipio(idEstado);
 
-        Object[] items = new Object[listaMunicipio.size()];
+            DefaultComboBoxModel<Municipio> model = new DefaultComboBoxModel<>();
+            for (Municipio municipio : listaMunicipio) {
+                model.addElement(municipio);
+            }
 
-        int contador = 0;
-
-        for (Municipio municipio : listaMunicipio) {
-            items[contador] = municipio;
-
-            contador++;
+            ((JComboBox) cboMunicipio).setModel(model);
         }
-
-        ComboBoxModel model = new DefaultComboBoxModel(items);
-
-        cboMunicipio.setModel(model);
-
     }
 
     private void limparCampos() {

@@ -13,6 +13,7 @@ import ProjetoLocadoraVeiculos.entity.Seguradora;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,27 +66,26 @@ public class CadastroSeguradoraEditarGUI extends javax.swing.JDialog {
         ComboBoxModel model = new DefaultComboBoxModel(items);
 
         cboEstado.setModel(model);
+        cboEstado.addActionListener((e) -> {
+            carregarComboMunicipio();
+        });
     }
 
     private void carregarComboMunicipio() {
-        MunicipioDAO dao = new MunicipioDAO();
+        Estado estadoSelecionado = (Estado) cboEstado.getSelectedItem();
+        if (estadoSelecionado != null) {
+            int idEstado = estadoSelecionado.getId_estado();
 
-        List<Municipio> listaMunicipio = dao.select();
+            MunicipioDAO dao = new MunicipioDAO();
+            List<Municipio> listaMunicipio = dao.selectEstadoMunicipio(idEstado);
 
-        Object[] items = new Object[listaMunicipio.size()];
+            DefaultComboBoxModel<Municipio> model = new DefaultComboBoxModel<>();
+            for (Municipio municipio : listaMunicipio) {
+                model.addElement(municipio);
+            }
 
-        int contador = 0;
-
-        for (Municipio municipio : listaMunicipio) {
-            items[contador] = municipio;
-
-            contador++;
+            ((JComboBox) cboMunicipio).setModel(model);
         }
-
-        ComboBoxModel model = new DefaultComboBoxModel(items);
-
-        cboMunicipio.setModel(model);
-
     }
 
     private void limparCampos() {

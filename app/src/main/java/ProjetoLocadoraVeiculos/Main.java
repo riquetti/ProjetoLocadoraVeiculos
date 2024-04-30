@@ -6,10 +6,10 @@ package ProjetoLocadoraVeiculos;
 
 import ProjetoLocadoraVeiculos.gui.TelaPrincipal;
 
+// telefones, carregar o cliente que está editando
 // criar validação dos campos de entrada
 // padronizar as consultas na bibliotecas
 // corrigir filtros em telas com mais de um combobox
-// colocar os telefones na seguradora e no cliente
 
 /**
  *

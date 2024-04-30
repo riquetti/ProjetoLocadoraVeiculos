@@ -23,14 +23,20 @@ public class ClienteDAO {
     public List<Cliente> select() {
         List<Cliente> listaCliente = new ArrayList<>();
         String query = String.format("""
-                       SELECT * FROM cliente;
+                SELECT c.id, c.nome_cliente , c.rg, c.cpf, c.logradouro,
+                  c.id_municipio, c.id_estado, c.cnh, c.cnhdatavencimento ,
+                    c.email_cliente,
+                     m.descricao AS municipio, e.descricao  AS estado
+                        FROM cliente c
+                        INNER JOIN municipio m ON c.id_municipio = m.id_municipio
+                        INNER JOIN estado e ON c.id_estado = e.id_estado;
                        """);
 
         try (Statement stmt = Conexao.getConn().createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setId(rs.getInt("id"));
-                cliente.setNome(rs.getString("nome_cliente"));
+                cliente.setNome_cliente(rs.getString("nome_cliente"));
                 cliente.setRg(rs.getString("rg"));
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setLogradouro(rs.getString("logradouro"));
@@ -39,6 +45,8 @@ public class ClienteDAO {
                 cliente.setCnh(rs.getString("cnh"));
                 cliente.setCnhdatavencimento(rs.getDate("cnhdatavencimento"));
                 cliente.setEmail_cliente(rs.getString("email_cliente"));
+                cliente.setMunicipio(rs.getString("municipio"));
+                cliente.setEstado(rs.getString("estado"));
 
                 listaCliente.add(cliente);
             }
@@ -58,7 +66,7 @@ public class ClienteDAO {
             if (rs.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setId(rs.getInt("id"));
-                cliente.setNome(rs.getString("nome_cliente"));
+                cliente.setNome_cliente(rs.getString("nome_cliente"));
                 cliente.setRg(rs.getString("rg"));
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setLogradouro(rs.getString("logradouro"));
@@ -67,6 +75,8 @@ public class ClienteDAO {
                 cliente.setCnh(rs.getString("cnh"));
                 cliente.setCnhdatavencimento(rs.getDate("cnhdatavencimento"));
                 cliente.setEmail_cliente(rs.getString("email_cliente"));
+                cliente.setMunicipio("municipio");
+                cliente.setEstado("estado");
 
                 return cliente;
             }

@@ -41,12 +41,12 @@ public class CadastroClienteGUI extends javax.swing.JDialog {
 
         for (Cliente cliente : listaCliente) {
             dados[i][0] = cliente.getId();
-            dados[i][1] = cliente.getNome();
+            dados[i][1] = cliente.getNome_cliente();
             dados[i][2] = cliente.getRg();
             dados[i][3] = cliente.getCpf();
             dados[i][4] = cliente.getLogradouro();
-            dados[i][5] = cliente.getId_municipio();
-            dados[i][6] = cliente.getId_estado();
+            dados[i][5] = cliente.getMunicipio();
+            dados[i][6] = cliente.getEstado();
             dados[i][7] = cliente.getCnh();
             dados[i][8] = cliente.getCnhdatavencimento();
             dados[i][9] = cliente.getEmail_cliente();
